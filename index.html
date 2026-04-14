@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Enzo Durville | Designer Multimédia</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- HERO LAYOUT AVEC PHOTO --- */
+        .hero-layout {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .hero-text p {
+            color: var(--text-dim);
+            margin: 30px 0;
+            font-size: 1.2rem;
+            max-width: 520px;
+            line-height: 1.6;
+        }
+
+        .hero-text .btn-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* --- PHOTO GLOW --- */
+        .hero-photo-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        /* Halo animé derrière la photo */
+        .hero-photo-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -18px;
+            border-radius: 32px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.55) 0%, rgba(138, 43, 226, 0.15) 55%, transparent 75%);
+            filter: blur(18px);
+            animation: pulseGlow 3s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        /* Anneau violet tournant */
+        .hero-photo-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 28px;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(138, 43, 226, 0.9) 60deg,
+                rgba(180, 100, 255, 1) 90deg,
+                rgba(138, 43, 226, 0.9) 120deg,
+                transparent 180deg,
+                rgba(138, 43, 226, 0.4) 240deg,
+                transparent 360deg
+            );
+            animation: spinRing 4s linear infinite;
+            z-index: 0;
+        }
+
+        .hero-photo {
+            position: relative;
+            z-index: 1;
+            width: 280px;
+            height: 340px;
+            object-fit: cover;
+            border-radius: 24px;
+            border: 2px solid rgba(138, 43, 226, 0.6);
+            display: block;
+            /* Légère lueur interne sur la photo elle-même */
+            box-shadow:
+                0 0 30px rgba(138, 43, 226, 0.4),
+                0 0 60px rgba(138, 43, 226, 0.15),
+                inset 0 0 20px rgba(138, 43, 226, 0.05);
+            filter: brightness(1.05) contrast(1.05);
+        }
+
+        /* Petit badge flottant */
+        .hero-photo-badge {
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            background: rgba(138, 43, 226, 0.2);
+            border: 1px solid rgba(138, 43, 226, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #c084fc;
+            white-space: nowrap;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50%       { opacity: 1;   transform: scale(1.06); }
+        }
+
+        @keyframes spinRing {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero-layout {
+                flex-direction: column-reverse;
+                height: auto;
+                padding-top: 20px;
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-text { align-items: center; }
+            .hero-text p { font-size: 1rem; }
+            .hero-photo { width: 200px; height: 240px; }
+        }
+    </style>
+</head>
+<body>
+   <canvas id="bg-canvas"></canvas>
+
+   <nav>
+    <div class="nav-container-left">
+        <img src="moi.jpg" alt="Enzo Durville" class="nav-author-img">
+        <div class="logo">ENZO<span>.</span>DURVILLE</div>
+    </div>
+    
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html" class="active" id="nav-home">Accueil</a>
+        <a href="projets.html" id="nav-projects">Projets</a>
+        <a href="a-propos.html" id="nav-about">À Propos</a>
+    </div>
+</nav>
+
+    <main class="container">
+        <div class="hero-layout">
+
+            <!-- TEXTE GAUCHE -->
+            <div class="hero-text">
+                <span class="section-tag">Étudiant en BUT MMI</span>
+
+                <h1 class="big-title">
+                    Designer <br>
+                    <span class="purple-glow">Multimédia</span>
+                </h1>
+
+                <p>
+                    Stratégie digitale, Montage Vidéo & Direction Artistique.<br>
+                    Création de contenus impactants pour le web.
+                </p>
+
+                <div class="btn-group">
+                    <a href="projets.html" class="btn-open" style="width:auto; padding:18px 35px; margin-top:0;">
+                        Voir mes projets
+                    </a>
+                    <a href="a-propos.html" class="btn-open" style="width:auto; padding:18px 35px; margin-top:0; background:rgba(138,43,226,0.15); border:1px solid var(--accent);">
+                        En savoir plus
+                    </a>
+                </div>
+            </div>
+
+            <!-- PHOTO DROITE avec GLOW -->
+            <div class="hero-photo-wrapper">
+                <img src="moi.jpg" alt="Enzo Durville" class="hero-photo">
+                <span class="hero-photo-badge">✦ Disponible</span>
+            </div>
+
+        </div>
+    </main>
+
+<footer>
+    <div class="footer-vertical-container">
+        <div class="footer-status-badge">
+            <span class="status-dot"></span>
+            <span class="status-text">Système Opérationnel</span>
+        </div>
+        <p class="footer-credit">Conçu & Développé par <strong>Enzo Durville</strong></p>
+        <p class="copyright">© 2026 — Tous droits réservés</p>
+    </div>
+</footer>
+    <script src="script.js"></script>
+</body>
+</html>
