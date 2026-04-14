@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mes Projets | Enzo Durville</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+   <nav>
+    <div class="nav-container-left">
+        <img src="moi.jpg" alt="Enzo Durville" class="nav-author-img">
+        <div class="logo">ENZO<span>.</span>DURVILLE</div>
+    </div>
+    
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html" id="nav-home">Accueil</a>
+        <a href="projets.html" class="active" id="nav-projects">Projets</a>
+        <a href="a-propos.html" id="nav-about">À Propos</a>
+    </div>
+</nav>
+
+    <main class="container">
+        <h2 class="big-title">Mes <span class="purple-glow">Réalisations</span></h2>
+        <div class="project-grid" id="gallery"></div>
+    </main>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <div class="modal-left">
+                    <h2 id="modalTitle" class="purple-glow" style="font-size: 2rem; text-transform: uppercase;"></h2>
+                    <p id="modalDesc" style="margin-top: 15px; color: var(--text-dim); line-height: 1.6;"></p>
+                    <img id="modalImg" src="" alt="Aperçu">
+                </div>
+
+                <div class="modal-right">
+                    <div class="project-info-box">
+                        <div class="info-item">
+                            <span class="info-label">Type de Projet</span>
+                            <span id="modalTag"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Outils Utilisés</span>
+                            <span id="modalTools"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Réalisation</span>
+                            <span id="modalTeam"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Mon Rôle</span>
+                            <span id="modalRole"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Année</span>
+                            2025/2026 / BUT MMI
+                        </div>
+                    </div>
+                    <a id="modalLink" href="#" target="_blank" class="btn-open">Ouvrir le projet ↗</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+<footer>
+    <div class="footer-vertical-container">
+        <div class="footer-status-badge">
+            <span class="status-dot"></span>
+            <span class="status-text">Système Opérationnel</span>
+        </div>
+         <p class="footer-credit">Conçu & Développé par <strong>Enzo Durville</strong></p>
+        <p class="copyright">© 2026 — Tous droits réservés</p>
+    </div>
+</footer>
+</html>
