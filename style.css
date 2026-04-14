@@ -1,0 +1,290 @@
+/* --- VARIABLES ET THÈME --- */
+:root {
+    --bg: #050505;
+    --card-bg: rgba(17, 17, 17, 0.9);
+    --accent: #8a2be2; 
+    --text: #ffffff;
+    --text-dim: #a0a0a0;
+    --border: #222222;
+    --font-main: 'Inter', -apple-system, sans-serif;
+}
+
+/* --- RESET ET BASE --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    background-color: var(--bg); 
+    color: var(--text); 
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+#bg-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; background: var(--bg);
+}
+
+/* --- NAVIGATION --- */
+nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 8%; height: 80px; position: fixed; width: 100%; top: 0; z-index: 1000;
+    background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+}
+
+.nav-container-left { display: flex; align-items: center; gap: 15px; }
+.nav-author-img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; }
+.logo { font-size: 1.4rem; font-weight: 800; }
+.logo span { color: var(--accent); }
+
+.nav-links a { 
+    text-decoration: none; color: var(--text-dim); margin-left: 35px; 
+    transition: 0.3s; font-weight: 500;
+}
+.nav-links a.active, .nav-links a:hover { color: var(--accent); }
+
+/* --- CONTENEUR --- */
+.container { max-width: 1100px; margin: 0 auto; padding: 140px 20px 60px; }
+
+/* --- TYPOGRAPHIE --- */
+.big-title {
+    font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900;
+    text-transform: uppercase; line-height: 0.9; letter-spacing: -2px; margin-bottom: 20px;
+}
+.purple-glow { color: var(--accent); text-shadow: 0 0 20px rgba(138, 43, 226, 0.6); }
+
+/* --- GRILLE BENTO (À PROPOS) --- */
+.bento-grid { 
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; 
+}
+.bento-item { 
+    background: var(--card-bg); border: 1px solid var(--border); 
+    padding: 25px; border-radius: 24px; transition: 0.4s ease;
+}
+.bento-item:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+.col-4 { grid-column: span 4; }
+.col-2 { grid-column: span 2; } /* Pour mettre 2 blocs côte à côte */
+
+/* Profil & Actions */
+.bio-content { display: flex; align-items: center; gap: 30px; }
+.profile-photo { width: 130px; height: 130px; border-radius: 20px; border: 2px solid var(--accent); object-fit: cover; }
+.bio-actions { margin-top: 20px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+
+.cv-button {
+    background: var(--accent); color: white; text-decoration: none;
+    padding: 10px 22px; border-radius: 12px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px; transition: 0.3s;
+}
+.cv-button:hover { background: #a147ff; transform: scale(1.05); }
+
+.bio-socials a {
+    color: var(--text-dim); text-decoration: none; font-size: 0.85rem;
+    padding: 8px 15px; border: 1px solid var(--border); border-radius: 10px; transition: 0.3s;
+}
+.bio-socials a:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Logiciels */
+.soft-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+.soft-card { 
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.03); width: 75px; height: 85px; 
+    border-radius: 15px; border: 1px solid var(--border);
+}
+.soft-card img { width: 28px; height: 28px; margin-bottom: 5px; }
+.soft-card span { font-size: 0.6rem; color: var(--text-dim); text-align: center; }
+
+/* --- GRILLE PROJETS --- */
+.project-grid { 
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; 
+}
+.project-card { 
+    background: var(--card-bg); border: 1px solid var(--border); 
+    border-radius: 5px; overflow: hidden; cursor: pointer; transition: 0.4s;
+}
+.project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+.project-img-container { width: 100%; height: 220px; overflow: hidden; }
+.project-img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --- MODALE PROJETS --- */
+.modal {
+    display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+    width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center;
+}
+.modal-content {
+    background: #111; width: 90%; max-width: 900px; border-radius: 30px;
+    padding: 40px; position: relative; border: 1px solid var(--border);
+}
+.close-btn { position: absolute; right: 25px; top: 20px; font-size: 30px; cursor: pointer; }
+.modal-body { display: flex; gap: 30px; }
+.modal-left { flex: 1.5; }
+.modal-right { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+#modalImg { width: 100%; border-radius: 15px; margin-top: 20px; border: 1px solid var(--border); }
+
+.project-info-box { background: #181818; padding: 20px; border-radius: 20px; }
+.info-item { margin-bottom: 15px; }
+.info-label { display: block; color: var(--accent); font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+
+.btn-open {
+    display: inline-block; background: var(--accent); color: white;
+    padding: 15px; border-radius: 12px; text-align: center; text-decoration: none; font-weight: bold;
+}
+
+/* --- FOOTER --- */
+footer { margin-top: 50px; padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+.footer-status-container { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px; }
+.status-dot { height: 8px; width: 8px; background: #00ff00; border-radius: 50%; box-shadow: 0 0 8px #00ff00; }
+
+/* --- MENU MOBILE --- */
+.menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+.bar { width: 25px; height: 3px; background: white; border-radius: 2px; transition: 0.3s; }
+
+@media (max-width: 768px) {
+    .menu-toggle { display: flex; }
+    .nav-links {
+        display: none; position: absolute; top: 80px; left: 0; width: 100%;
+        background: rgba(5,5,5,0.95); flex-direction: column; padding: 20px; text-align: center;
+    }
+    .nav-links.active { display: flex; }
+    .nav-links a { margin: 15px 0; }
+    .bento-grid, .project-grid { grid-template-columns: 1fr; }
+    .col-4, .col-2 { grid-column: span 1; }
+    .modal-body { flex-direction: column; }
+    .bio-content { flex-direction: column; text-align: center; }
+}
+/* --- FOOTER VERTICAL ET CENTRÉ --- */
+footer {
+    background-color: #000000; /* Fond noir pur */
+    padding: 60px 20px;
+    border-top: 1px solid #111;
+    width: 100%;
+    margin-top: 80px;
+}
+
+.footer-vertical-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; /* Aligne les éléments verticalement */
+    align-items: center;    /* Centre horizontalement */
+    justify-content: center;
+    gap: 20px;              /* Espace entre chaque ligne */
+    text-align: center;
+}
+
+.footer-logo {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.footer-credit {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.footer-credit strong {
+    color: var(--text);
+}
+
+/* --- BADGE STATUT VERTICAL --- */
+.footer-status-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 255, 0, 0.05); /* Très léger fond vert */
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    margin: 10px 0;
+}
+
+.status-dot {
+    height: 6px;
+    width: 6px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #00ff00;
+}
+
+.status-text {
+    font-size: 0.7rem;
+    color: #00ff00;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    animation: glow-simple 2.5s infinite ease-in-out;
+}
+
+.copyright {
+    font-size: 0.7rem;
+    color: white;
+    margin-top: 10px;
+}
+
+/* Animation douce de lueur */
+@keyframes glow-simple {
+    0%, 100% { opacity: 1; text-shadow: 0 0 5px rgba(0, 255, 0, 0.2); }
+    50% { opacity: 0.7; text-shadow: 0 0 15px rgba(0, 255, 0, 0.5); }
+}
+
+/* --- ADAPTATION MOBILE --- */
+@media (max-width: 480px) {
+    footer {
+        padding: 40px 20px;
+    }
+    .footer-credit {
+        font-size: 0.8rem;
+    }
+}
+/* --- COMPÉTENCES / LOGICIELS --- */
+.soft-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.soft-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    width: 80px;
+    height: 90px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animation rebondie */
+    cursor: default;
+}
+
+/* NOUVEL EFFET HOVER SUR LES ICONES */
+.soft-card:hover {
+    background: rgba(138, 43, 226, 0.1); /* Fond violet très léger */
+    border-color: var(--accent);       /* Bordure violette */
+    transform: translateY(-5px) scale(1.1); /* Monte et grossit */
+    box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3); /* Lueur violette */
+}
+
+.soft-card img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.soft-card:hover img {
+    transform: rotate(5deg); /* Petite rotation de l'icône au survol */
+}
+
+.soft-card span {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    margin-top: 8px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.soft-card:hover span {
+    color: #ffffff; /* Texte devient blanc pur au survol */
+}
